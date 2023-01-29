@@ -63,14 +63,22 @@ fetch('http://10.2.0.25:3000/roomies/task', {
 
 export default function ListScreen({navigation}) {
     const [task, setTask] = useState(''); //how to create a state, first arg is name of state, second arg is 
-    const [taskItems, setTaskItems] = useState(STARTINGTASKS);
+    const [taskItems, setTaskItems] = useState([]);
+    const [money, setMoney] = useState(0);
+    const [moneyItems, setMoneyItems] = useState([]);
             
     const handleAddTask = () => {
         Keyboard.dismiss();
-        setTaskItems([...taskItems, task]);        
-        writeTask(task, GLOBALGROUPID);                                     //FIGURE OUT GROUP ID
+        let taskCost = "0";
+        if (task != null) {
+            taskCost = task.split(" ");
+        }
+
+        setTaskItems([...taskItems, taskCost[0]]);
+        setMoneyItems([...moneyItems, parseInt(taskCost[1])]);
+        writeTask(task, GLOBALGROUPID);
         setTask(null);
-    }    
+    }  
 
     const completeTask = (index) => {
         let itemsCopy = [...taskItems];
@@ -103,13 +111,23 @@ export default function ListScreen({navigation}) {
             </View>
         {/* Writing a shopping item */}
         <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            keyboardVerticalOffset={92}
+            behavior = "padding"
             style={styles.writeTaskWrapper}>
-            <TextInput style={styles.input} placeholder={'Write a task...'} value={task} onChangeText={text => setTask(text)} />
 
+            <TextInput 
+                style={styles.input} 
+                placeholder={'Write down your shopping item...'} 
+                value={task} 
+                onChangeText={text => {
+                    const taskCost = text.split(" ");
+                    setTask(taskCost[0]);
+                    setMoney(parseInt(taskCost[1]));
+                }} 
+            />
             <TouchableOpacity onPress={() => handleAddTask()}>
                 <View style={styles.addWrapper}>
-                    <Text style={styles.addText} >+</Text>
+                    <Text style={styles.addText}>+</Text>
                 </View>
             </TouchableOpacity>
         </KeyboardAvoidingView>
