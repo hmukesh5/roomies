@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {StyleSheet, TouchableOpacity, View, Text, TextInput, Button, Alert} from 'react-native'
 
-
-const NAME = { name: 'Hemanth' };
+export var GLOBALNAME = "";
+export var GLOBALGROUPID = 0;
 
 //write name with a string name and groupid number
 function writeName(name, groupid) {
-    console.log("pressing");
+    console.log("writing");
     fetch('http://10.2.0.25:3000/roomies/name', {
         method: 'POST',
         headers: {
@@ -20,7 +20,10 @@ function writeName(name, groupid) {
     })
     .then(response => response.json())
     .then(data => console.log(data))
-    .catch(error => console.error(error))
+    .catch(error => console.error(error));
+
+    GLOBALNAME = name;
+    GLOBALGROUPID = groupid;
 }
 
 export default function ProfileScreen({navigation}) {
@@ -43,7 +46,7 @@ export default function ProfileScreen({navigation}) {
                 onChangeText={text => setName(text)}
                 style={{ borderBottomWidth: 1, padding: 5, fontSize: 18 }}
             />
-            <Button onPress={() => Alert.alert("Hi hemanth")} title="Sync" style={styles.button}></Button>
+            <Button onPress={() => writeName(name, idName)} title="Sync" style={styles.button}></Button>
         </View>
     )
 }

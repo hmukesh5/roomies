@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, Text, TouchableWithoutFeedback, KeyboardAvoidingView, TextInput, TouchableOpacity, Keyboard, ScrollView} from 'react-native'
 import Task from './components/To-Dos';
+import { GLOBALGROUPID, GLOBALNAME } from './Profile';
 
 //function to post values to database
 function writeTask(taskName, groupid) {
@@ -63,13 +64,13 @@ export default function ListScreen({navigation}) {
     const handleAddTask = () => {
         Keyboard.dismiss();
         setTaskItems([...taskItems, task]);        
-        writeTask(task, 2);                                     //FIGURE OUT GROUP ID
+        writeTask(task, GLOBALGROUPID);                                     //FIGURE OUT GROUP ID
         setTask(null);
     }    
 
     const completeTask = (index) => {
         let itemsCopy = [...taskItems];
-        delTask(taskItems[index], 2);
+        delTask(taskItems[index], GLOBALGROUPID);
         itemsCopy.splice(index, 1);
         setTaskItems(itemsCopy);
     }
