@@ -8,11 +8,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import ProfileScreen from './screens/Profile'
 import TasksScreen from './screens/Tasks'
 import ListScreen from './screens/List'
+import EventsScreen from './screens/Events'
 
 // Screen names
 const profileName = "Profile";
 const tasksName = "Tasks";
 const listName = "List";
+const eventsName = "Events";
 
 const Tab = createBottomTabNavigator();
 
@@ -32,6 +34,8 @@ export default function MainContainer(){
                         iconName = focused ? 'list' : 'list-outline'
                     } else if (rn === listName) {
                         iconName = focused ? 'settings' : 'settings-outline'
+                    } else if (rn === eventsName) {
+                        iconName = focused ? 'today' : 'today-outline'
                     }
 
                     return <Ionicons name={iconName} size={size} color={color}/>
@@ -43,6 +47,7 @@ export default function MainContainer(){
             <Tab.Screen name={profileName} component={ProfileScreen} options={{tabBarBadge: 3}}/>
             <Tab.Screen name={tasksName} component={TasksScreen}/>
             <Tab.Screen name={listName} component={ListScreen}/>
+            <Tab.Screen name={eventsName} component={EventsScreen}/>
 
 
             </Tab.Navigator>
