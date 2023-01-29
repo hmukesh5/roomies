@@ -3,7 +3,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Image} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 
 // Screens
 import ProfileScreen from './screens/Profile';
@@ -22,7 +22,7 @@ const Tab = createBottomTabNavigator();
 function LogoTitle() {
     return (
       <Image
-        style={{width: 50, height:50}}
+        style={{alignContent: 'center', width: 90, height:40, marginBottom: 15}}
         source={require('./roomies-large.png')}
       />
     );
@@ -54,10 +54,10 @@ export default function MainContainer(){
                 tabBarInactiveTintColor: 'gray'
             })}>
 
-            <Tab.Screen name={profileName} component={ProfileScreen} options={{tabBarBadge: 3, headerTitle: (props) => <LogoTitle {...props}/>}}/>
-            <Tab.Screen name={tasksName} component={TasksScreen}/>
-            <Tab.Screen name={listName} component={ListScreen}/>
-            <Tab.Screen name={eventsName} component={EventsScreen}/>
+            <Tab.Screen name={profileName} component={ProfileScreen} options={{headerStyle: {backgroundColor: '#95c9cc'}, tabBarBadge: 3, headerTitle: (props) => <LogoTitle {...props}/>}}/>
+            <Tab.Screen name={tasksName} component={TasksScreen} options={{headerStyle: {backgroundColor: '#95c9cc'}, headerTitle: (props) => <LogoTitle {...props}/>}}/>
+            <Tab.Screen name={listName} component={ListScreen} options={{headerStyle: {backgroundColor: '#95c9cc'}, headerTitle: (props) => <LogoTitle {...props}/>}}/>
+            <Tab.Screen name={eventsName} component={EventsScreen} options={{headerStyle: {backgroundColor: '#95c9cc'}, headerTitle: (props) => <LogoTitle {...props}/>}}/>
 
 
             </Tab.Navigator>
