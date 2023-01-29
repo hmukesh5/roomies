@@ -13,7 +13,8 @@ const connection = mysql.createPool({
 
 const app = express();
 
-app.get('/users', function (req, res) {
+//get request is made to http://ip:3000/roomies
+app.get('/roomies', function (req, res) {
     
     // Connecting to the database.
     connection.getConnection(function (err, connection) {
@@ -29,7 +30,30 @@ app.get('/users', function (req, res) {
 
 });
 
+//post request is made to http://ip:3000/roomies
+app.post('/roomies', function(req, res) {
+
+});
+
 // Starting our server.
 app.listen(3000, () => {
- console.log('Data fetched at http://localhost:3000/users');
+ console.log('Server listening at http://localhost:3000/roomies');
 });
+
+
+
+//fetch stuff
+
+//post request
+/*
+fetch('http://localhost:3000/store-data', {
+        method: 'POST',
+        // We convert the React state to JSON and send it as the POST body
+        body: JSON.stringify(this.state)
+      }).then(function(response) {
+        console.log(response)
+        return response.json();
+      });
+*/
+
+//
