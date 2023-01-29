@@ -36,15 +36,11 @@ export default function MainContainer(){
 
                     return <Ionicons name={iconName} size={size} color={color}/>
                 },
-            })}
-            tabBarOptions={{
-                activeTintColor: '#e85a5a',
-                inactiveTintColor: 'grey',
-                labelStyle: {fontSize: 10}
-            }}
-            >
+                tabBarActiveTintColor: '#3e96c9',
+                tabBarInactiveTintColor: 'gray'
+            })}>
 
-            <Tab.Screen name={homeName} component={HomeScreen}/>
+            <Tab.Screen name={homeName} component={HomeScreen} options={{ tabBarBadge: 3}}/>
             <Tab.Screen name={tasksName} component={TasksScreen}/>
             <Tab.Screen name={listName} component={ListScreen}/>
 
