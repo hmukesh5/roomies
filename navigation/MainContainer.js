@@ -31,9 +31,9 @@ export default function MainContainer(){
                     if (rn === profileName) {
                         iconName = focused ? 'person' : 'person-outline'
                     } else if (rn === tasksName) {
-                        iconName = focused ? 'list' : 'list-outline'
+                        iconName = focused ? 'checkbox' : 'checkbox-outline'
                     } else if (rn === listName) {
-                        iconName = focused ? 'settings' : 'settings-outline'
+                        iconName = focused ? 'list' : 'list-outline'
                     } else if (rn === eventsName) {
                         iconName = focused ? 'today' : 'today-outline'
                     }
