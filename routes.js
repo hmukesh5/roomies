@@ -37,6 +37,27 @@ app.post('/roomies/name', function(req, res) {
     res.status(200).json({ message: "Data received" });
 });
 
+//getting the name and groupid, and writing it
+app.post('/roomies/task', function(req, res) {
+    const data = req.body;
+    console.log(data);
+
+    //sql query to add name
+    connection.getConnection(function (err, connection) {
+        // Executing the MySQL query (select all data from the 'users' table).
+        let sql = " INSERT IGNORE INTO shoppinglist (name, groupid) VALUES ?";
+        let values = [
+            [data.taskname, data.groupid, ],            
+        ];
+        connection.query(sql, [values], function (error, results, fields) {
+            if (error) throw error;
+            console.log("recorded values");       
+        });
+    });
+
+    res.status(200).json({ message: "Data received" });
+});
+
 //get request is made to http://ip:3000/roomies
 app.get('/roomies', function (req, res) {
     
