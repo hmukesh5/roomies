@@ -58,6 +58,24 @@ app.post('/roomies/task', function(req, res) {
     res.status(200).json({ message: "Data received" });
 });
 
+//deleting task
+app.post('/roomies/task/delete', function(req, res) {
+    const data = req.body;
+    console.log(data);
+
+    //sql query to add name
+    connection.getConnection(function (err, connection) {
+        // Executing the MySQL query (select all data from the 'users' table).
+        let sql = ' DELETE FROM shoppinglist WHERE name = "' + data.taskname + '" AND groupid = ' + data.groupid;        
+        connection.query(sql, function (error, results, fields) {
+            if (error) throw error;
+            console.log("deleted values");       
+        });
+    });
+
+    res.status(200).json({ message: "Data received" });
+});
+
 //get request is made to http://ip:3000/roomies
 app.get('/roomies/task', function (req, res) {
     
