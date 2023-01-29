@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {TouchableOpacity, View, Text, TextInput} from 'react-native'
+import {StyleSheet, TouchableOpacity, View, Text, TextInput, Button, Alert} from 'react-native'
 
 
 const NAME = { name: 'Hemanth' };
@@ -43,7 +43,13 @@ export default function ProfileScreen({navigation}) {
                 onChangeText={text => setName(text)}
                 style={{ borderBottomWidth: 1, padding: 5, fontSize: 18 }}
             />
-
+            <Button onPress={() => Alert.alert("Hi hemanth")} title="Sync" style={styles.button}></Button>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    button : {
+        
+    },
+})

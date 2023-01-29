@@ -1,14 +1,15 @@
-import * as React from 'react'
+import * as React from 'react';
 
-import { NavigationContainer } from '@react-navigation/native'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Image} from 'react-native';
 
 // Screens
-import ProfileScreen from './screens/Profile'
-import TasksScreen from './screens/Tasks'
-import ListScreen from './screens/List'
-import EventsScreen from './screens/Events'
+import ProfileScreen from './screens/Profile';
+import TasksScreen from './screens/Tasks';
+import ListScreen from './screens/List';
+import EventsScreen from './screens/Events';
 
 // Screen names
 const profileName = "Profile";
@@ -17,6 +18,15 @@ const listName = "List";
 const eventsName = "Events";
 
 const Tab = createBottomTabNavigator();
+
+function LogoTitle() {
+    return (
+      <Image
+        style={{width: 50, height:50}}
+        source={require('./roomies-large.png')}
+      />
+    );
+  }  
 
 export default function MainContainer(){
     return(
@@ -44,7 +54,7 @@ export default function MainContainer(){
                 tabBarInactiveTintColor: 'gray'
             })}>
 
-            <Tab.Screen name={profileName} component={ProfileScreen} options={{tabBarBadge: 3}}/>
+            <Tab.Screen name={profileName} component={ProfileScreen} options={{tabBarBadge: 3, headerTitle: (props) => <LogoTitle {...props}/>}}/>
             <Tab.Screen name={tasksName} component={TasksScreen}/>
             <Tab.Screen name={listName} component={ListScreen}/>
             <Tab.Screen name={eventsName} component={EventsScreen}/>
