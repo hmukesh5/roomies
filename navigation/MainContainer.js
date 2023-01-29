@@ -54,7 +54,7 @@ export default function MainContainer(){
                 tabBarInactiveTintColor: 'gray'
             })}>
 
-            <Tab.Screen name={profileName} component={ProfileScreen} options={{headerStyle: {backgroundColor: '#95c9cc'}, tabBarBadge: 3, headerTitle: (props) => <LogoTitle {...props}/>}}/>
+            <Tab.Screen name={profileName} component={ProfileScreen} options={{headerStyle: {backgroundColor: '#95c9cc'}, headerTitle: (props) => <LogoTitle {...props}/>}}/>
             <Tab.Screen name={tasksName} component={TasksScreen} options={{headerStyle: {backgroundColor: '#95c9cc'}, headerTitle: (props) => <LogoTitle {...props}/>}}/>
             <Tab.Screen name={listName} component={ListScreen} options={{headerStyle: {backgroundColor: '#95c9cc'}, headerTitle: (props) => <LogoTitle {...props}/>}}/>
             <Tab.Screen name={eventsName} component={EventsScreen} options={{headerStyle: {backgroundColor: '#95c9cc'}, headerTitle: (props) => <LogoTitle {...props}/>}}/>
