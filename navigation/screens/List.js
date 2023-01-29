@@ -4,8 +4,27 @@ import Task from './components/To-Dos';
 
 //function to post values to database
 function writeTask(taskName, groupid) {
-    console.log("pressing");
+    console.log("writing");
     fetch('http://10.2.0.25:3000/roomies/task', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        // We convert the React state to JSON and send it as the POST body
+        body: JSON.stringify({
+            taskname: taskName,
+            groupid: groupid
+        })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error))
+}
+
+//function to post values to database
+function delTask(taskName, groupid) {
+    console.log("deleting");
+    fetch('http://10.2.0.25:3000/roomies/task/delete', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -50,6 +69,7 @@ export default function ListScreen({navigation}) {
 
     const completeTask = (index) => {
         let itemsCopy = [...taskItems];
+        delTask(taskItems[index], 2);
         itemsCopy.splice(index, 1);
         setTaskItems(itemsCopy);
     }
