@@ -23,6 +23,8 @@ function writeName(name, groupid) {
 }
 
 export default function ProfileScreen({navigation}) {
+
+
     return(
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text
@@ -30,7 +32,15 @@ export default function ProfileScreen({navigation}) {
                 style={{fontSize: 26, fontWeight: 'bold'}}>
                 Profile Screen
             </Text>
-
+            
+            <Text style={{fontSize:75}}>Welcome Adnan!</Text>
+            <Text>Group ID: 7</Text>
+            <Text>Group Members:</Text>
+            <View >
+              <Text >Hemanth</Text>
+              <Text>Albert</Text>
+              <Text>Payton</Text>
+            </View>
         </View>
     )
 }
