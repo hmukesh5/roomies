@@ -43,6 +43,7 @@ export default function ProfileScreen({navigation}) {
                 onChangeText={text => setName(text)}
                 style={{ borderBottomWidth: 1, padding: 5, fontSize: 18 }}
             />
+
         </View>
     )
 }
