@@ -13,6 +13,30 @@ const connection = mysql.createPool({
 
 const app = express();
 
+app.use(bodyParser.json());
+
+//post request is made to http://ip:3000/roomies
+//getting the name and groupid, and writing it
+app.post('/roomies/name', function(req, res) {
+    const data = req.body;
+    console.log(data);
+
+    //sql query to add name
+    connection.getConnection(function (err, connection) {
+        // Executing the MySQL query (select all data from the 'users' table).
+        let sql = " INSERT IGNORE INTO names (name, groupid) VALUES ?";
+        let values = [
+            [data.name, data.groupid],            
+        ];
+        connection.query(sql, [values], function (error, results, fields) {
+            if (error) throw error;
+            console.log("recorded values");       
+        });
+    });
+
+    res.status(200).json({ message: "Data received" });
+});
+
 //get request is made to http://ip:3000/roomies
 app.get('/roomies', function (req, res) {
     
@@ -30,30 +54,7 @@ app.get('/roomies', function (req, res) {
 
 });
 
-//post request is made to http://ip:3000/roomies
-app.post('/roomies', function(req, res) {
-
-});
-
 // Starting our server.
 app.listen(3000, () => {
  console.log('Server listening at http://localhost:3000/roomies');
 });
-
-
-
-//fetch stuff
-
-//post request
-/*
-fetch('http://localhost:3000/store-data', {
-        method: 'POST',
-        // We convert the React state to JSON and send it as the POST body
-        body: JSON.stringify(this.state)
-      }).then(function(response) {
-        console.log(response)
-        return response.json();
-      });
-*/
-
-//
