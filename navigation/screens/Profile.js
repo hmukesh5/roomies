@@ -26,7 +26,7 @@ export default function ProfileScreen({navigation}) {
 
 
     return(
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#E8EAED'}}>
             <Text
                 onPress={() => writeName("hemmy", 1)}
                 style={{fontSize: 26, fontWeight: 'bold'}}>

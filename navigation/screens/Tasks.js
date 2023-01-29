@@ -24,11 +24,8 @@ const styles = StyleSheet.create({
     },
     input : {
         borderWidth: 2,
-        borderColor: '#615c5c',
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
+        borderColor: '#C0C0C0',
+        borderRadius: 60,
         padding: 8,
         margin: 10,
         width: 200,

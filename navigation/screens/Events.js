@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Text, TouchableOpacity, Modal, TextInput } from 'react-native';
-import { KeyboardAvoidingView } from 'react-native';
+import { KeyboardAvoidingView, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -65,7 +65,7 @@ export default function EventsScreen({navigation}) {
 
     return(
         //watch videos on modal idk whats going on
-<View style={{ flex: 1}}>
+<View style={styles.container}>
   <Modal animationType="slide" transparent={false} visible={modalVisible}>
     <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#F5F5F5' }}>
       <View style={{ alignSelf: 'flex-start', padding: 20, width: '90%', borderRadius: 10,marginTop: 50 }}>
@@ -113,22 +113,13 @@ export default function EventsScreen({navigation}) {
       </View>
     </View>
   </Modal>
-
-
-
-            {/* {events.map((event, index) => (
-                    <View key={index} style={{backgroundColor: '#95c9cc', padding: 10, margin: 10}}>
-                        <Text>{event.eventName}</Text>
-                        <Text>{event.eventDate} at {event.eventTime}</Text>
-                        <Text>{event.eventDescription}</Text>
-                    </View>
-                ))} */}
-                <View style={{flex: 1, justifyContent: 'center'}}>
+  <Text style={styles.sectionTitle}>Events</Text>
+                <View style={{marginTop: 30, justifyContent: 'center'}}>
                 {events.length === 0 ? <Text style={{textAlign:'center',justifyContent:'center',fontSize:'75',opacity:'0.1'}}>No Events</Text> : 
         <ScrollView>
             
                 {events.map((event, index) => (
-  <View key={index} style={{backgroundColor: '#95c9cc', padding: 10, margin: 10,borderRadius: 10}}>
+  <View key={index} style={{backgroundColor: '#FFFFFF', padding: 10, margin: 10,borderRadius: 10}}>
     <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{event.eventName}</Text>
     <Text>{event.eventDate} at {event.eventTime}</Text>
     <Text>{event.eventDescription}</Text>
@@ -148,21 +139,51 @@ export default function EventsScreen({navigation}) {
 
 
             <TouchableOpacity
-                style={{
-                    position: 'absolute',
-                    bottom: 20,
-                    right: 20,
-                    backgroundColor: '#3e96c9',
-                    width: 50,
-                    height: 50,
-                    borderRadius: 25,
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}
+                style={styles.addWrapper}
                 onPress={() => {setModalVisible(true)}}
             >
-                <Ionicons name="ios-add" size={30} color="#fff" />
+                    <Text style={styles.addText} >+</Text>
             </TouchableOpacity>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#E8EAED',
+  },
+  tasksWrapper: {
+      paddingTop: 40, 
+      paddingHorizontal: 20,
+  },
+  sectionTitle: {
+      paddingTop: 40,
+      paddingHorizontal: 20,
+      fontSize: 24,
+      fontWeight: 'bold',
+      justifyContent: 'center'
+  },
+  addWrapper: {
+        width: 60,
+        height: 60,
+        backgroundColor: '#FFF',
+        borderRadius: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: '#C0C0C0',
+        borderWidth: 2,
+        position: 'absolute',
+        bottom: 60,
+        right: 26,
+  },
+  addText: {
+    position: 'absolute',
+    paddingBottom: 4,
+    paddingLeft: 1,
+    fontSize: 50,
+    color: 'grey',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+})
