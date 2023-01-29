@@ -5,12 +5,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 // Screens
-import HomeScreen from './screens/Home'
+import ProfileScreen from './screens/Profile'
 import TasksScreen from './screens/Tasks'
 import ListScreen from './screens/List'
 
 // Screen names
-const homeName = "Home";
+const profileName = "Profile";
 const tasksName = "Tasks";
 const listName = "List";
 
@@ -20,14 +20,14 @@ export default function MainContainer(){
     return(
         <NavigationContainer>
             <Tab.Navigator
-            initialRouteName={homeName}
+            initialRouteName={profileName}
             screenOptions={({route}) => ({
                 tabBarIcon: ({focused, color, size}) => {
                     let iconName;
                     let rn = route.name;
                     // icons at the bottom, highlights buttons when pressed
-                    if (rn === homeName) {
-                        iconName = focused ? 'home' : 'home-outline'
+                    if (rn === profileName) {
+                        iconName = focused ? 'person' : 'person-outline'
                     } else if (rn === tasksName) {
                         iconName = focused ? 'list' : 'list-outline'
                     } else if (rn === listName) {
@@ -40,7 +40,7 @@ export default function MainContainer(){
                 tabBarInactiveTintColor: 'gray'
             })}>
 
-            <Tab.Screen name={homeName} component={HomeScreen} options={{ tabBarBadge: 3}}/>
+            <Tab.Screen name={profileName} component={ProfileScreen} options={{tabBarBadge: 3}}/>
             <Tab.Screen name={tasksName} component={TasksScreen}/>
             <Tab.Screen name={listName} component={ListScreen}/>
 
