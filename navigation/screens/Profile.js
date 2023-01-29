@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {TouchableOpacity, View, Text} from 'react-native'
+import {TouchableOpacity, View, Text, TextInput} from 'react-native'
+
 
 const NAME = { name: 'Hemanth' };
 
@@ -25,14 +26,23 @@ function writeName(name, groupid) {
 export default function ProfileScreen({navigation}) {
 
 
-    return(
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text
-                onPress={() => writeName("hemmy", 1)}
-                style={{fontSize: 26, fontWeight: 'bold'}}>
-                Profile Screen
-            </Text>
+    const [idName, setIDName] = React.useState(0);
+    const [name, setName] = React.useState("");
 
+    return(
+        <View>
+            <Text style={{ fontWeight: 'bold' }}>ID:</Text>
+            <TextInput
+                value={idName}
+                onChangeText={text => setIDName(text)}
+                style={{ borderBottomWidth: 1, padding: 5, fontSize: 18 }}
+            />
+            <Text style={{ fontWeight: 'bold' }}>Name:</Text>
+            <TextInput
+                value={name}
+                onChangeText={text => setName(text)}
+                style={{ borderBottomWidth: 1, padding: 5, fontSize: 18 }}
+            />
         </View>
     )
 }

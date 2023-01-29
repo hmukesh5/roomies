@@ -128,7 +128,7 @@ export default function EventsScreen({navigation}) {
         <ScrollView>
             
                 {events.map((event, index) => (
-  <View key={index} style={{backgroundColor: '#95c9cc', padding: 10, margin: 10,borderRadius: 10}}>
+  <View key={index} style={{backgroundColor: '#FFFFFF', padding: 10, margin: 10,borderRadius: 10}}>
     <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{event.eventName}</Text>
     <Text>{event.eventDate} at {event.eventTime}</Text>
     <Text>{event.eventDescription}</Text>
