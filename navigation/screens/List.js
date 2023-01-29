@@ -2,16 +2,51 @@ import React, {useState} from 'react';
 import { StyleSheet, View, Text, TouchableWithoutFeedback, KeyboardAvoidingView, TextInput, TouchableOpacity, Keyboard, ScrollView} from 'react-native'
 import Task from './components/To-Dos';
 
+//function to post values to database
+function writeTask(taskName, groupid) {
+    console.log("pressing");
+    fetch('http://10.2.0.25:3000/roomies/task', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        // We convert the React state to JSON and send it as the POST body
+        body: JSON.stringify({
+            taskname: taskName,
+            groupid: groupid
+        })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error))
+}
+
+// GET VALUES FROM DATABASE
+let STARTINGTASKS = []
+fetch('http://10.2.0.25:3000/roomies/task', {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+  .then(response => response.json())
+  .then(data => {
+    const values = data.values;    
+    console.log(`Values: ${values}`);
+    STARTINGTASKS = values;
+  })
+  .catch(error => console.error(error));
+
 export default function ListScreen({navigation}) {
     const [task, setTask] = useState(''); //how to create a state, first arg is name of state, second arg is 
-    const [taskItems, setTaskItems] = useState([]);
-    
-
+    const [taskItems, setTaskItems] = useState(STARTINGTASKS);
+            
     const handleAddTask = () => {
         Keyboard.dismiss();
-        setTaskItems([...taskItems, task])
+        setTaskItems([...taskItems, task]);        
+        writeTask(task, 2);                                     //FIGURE OUT GROUP ID
         setTask(null);
-    }
+    }    
 
     const completeTask = (index) => {
         let itemsCopy = [...taskItems];
