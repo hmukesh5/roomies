@@ -37,7 +37,7 @@ export default function ProfileScreen({navigation}) {
             <Text>Group ID: 7</Text>
             <Text>Group Members:</Text>
             <View >
-              <Text >Hemanth</Text>
+              <Text>Hemanth</Text>
               <Text>Albert</Text>
               <Text>Payton</Text>
             </View>

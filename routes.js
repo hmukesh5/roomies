@@ -47,7 +47,7 @@ app.post('/roomies/task', function(req, res) {
         // Executing the MySQL query (select all data from the 'users' table).
         let sql = " INSERT IGNORE INTO shoppinglist (name, groupid) VALUES ?";
         let values = [
-            [data.taskname, data.groupid, ],            
+            [data.taskname, data.groupid]    
         ];
         connection.query(sql, [values], function (error, results, fields) {
             if (error) throw error;
@@ -56,6 +56,25 @@ app.post('/roomies/task', function(req, res) {
     });
 
     res.status(200).json({ message: "Data received" });
+});
+
+//get request is made to http://ip:3000/roomies
+app.get('/roomies/task', function (req, res) {
+    
+    // Connecting to the database.
+    connection.getConnection(function (err, connection) {
+
+        let sql = 'SELECT name FROM shoppinglist WHERE groupid = 2';
+
+        connection.query(sql, function (error, results) {
+            if (error) throw error;
+            const values = results.map(result => result.name);
+            console.log(results);
+            console.log(values);
+            res.send({ values });
+        });
+  });
+
 });
 
 //get request is made to http://ip:3000/roomies

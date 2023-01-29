@@ -22,7 +22,20 @@ function writeTask(taskName, groupid) {
 }
 
 // GET VALUES FROM DATABASE
-let STARTINGTASKS = ["dishes", "cleaning"];
+let STARTINGTASKS = []
+fetch('http://10.2.0.25:3000/roomies/task', {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+  .then(response => response.json())
+  .then(data => {
+    const values = data.values;    
+    console.log(`Values: ${values}`);
+    STARTINGTASKS = values;
+  })
+  .catch(error => console.error(error));
 
 export default function ListScreen({navigation}) {
     const [task, setTask] = useState(''); //how to create a state, first arg is name of state, second arg is 
@@ -31,7 +44,7 @@ export default function ListScreen({navigation}) {
     const handleAddTask = () => {
         Keyboard.dismiss();
         setTaskItems([...taskItems, task]);        
-        writeTask(task, 1);                                     //FIGURE OUT GROUP ID
+        writeTask(task, 2);                                     //FIGURE OUT GROUP ID
         setTask(null);
     }    
 
