@@ -50,7 +50,7 @@ export default function MainContainer(){
 
                     return <Ionicons name={iconName} size={size} color={color}/>
                 },
-                tabBarActiveTintColor: '#3e96c9',
+                tabBarActiveTintColor: '#81c8cc',
                 tabBarInactiveTintColor: 'gray'
             })}>
 
