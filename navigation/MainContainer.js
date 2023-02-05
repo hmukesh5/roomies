@@ -52,7 +52,7 @@ export default function MainContainer(){
 
                     return <Ionicons name={iconName} size={size} color={color}/>
                 },
-                tabBarActiveTintColor: colors.primary,
+                tabBarActiveTintColor: colors.icon_color,
                 tabBarInactiveTintColor: 'gray'
             })}>
 
@@ -60,7 +60,6 @@ export default function MainContainer(){
             <Tab.Screen name={tasksName} component={TasksScreen} options={{headerStyle: {backgroundColor: colors.primary}, headerTitle: (props) => <LogoTitle {...props}/>}}/>
             <Tab.Screen name={listName} component={ListScreen} options={{headerStyle: {backgroundColor: colors.primary}, headerTitle: (props) => <LogoTitle {...props}/>}}/>
             <Tab.Screen name={eventsName} component={EventsScreen} options={{headerStyle: {backgroundColor: colors.primary}, headerTitle: (props) => <LogoTitle {...props}/>}}/>
-
 
             </Tab.Navigator>
         </NavigationContainer>

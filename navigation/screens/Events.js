@@ -63,10 +63,10 @@ export default function EventsScreen({navigation}) {
 
     return(
       <View style={styles.container}>
-        <Modal animationType="slide" transparent={false} visible={modalVisible}>
-          <View style={styles.createEvent}>
-            <View style={{ paddingTop: 20, width: '90%', borderRadius: 10, marginTop: 70 }}>
-              <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 10 }}>Create Event</Text>
+        <Modal style={{height: '50%'}} animationType="slide" transparent={false} visible={modalVisible}>
+          <View style={styles.createEventContainer}>
+            <View style={styles.eventInfo}>
+              <Text style={styles.eventInfoTitle}>Create Event</Text>
               
               <CreateEventOption text={"Event Name"} val={eventName} setter={text => setEventName(text)}/>
               <CreateEventOption text={"Date"} val={eventDate} setter={text => setEventDate(text)}/>
@@ -74,11 +74,11 @@ export default function EventsScreen({navigation}) {
               <CreateEventOption text={"Description"} val={eventDescription} setter={text => setEventDescription(text)}/>
 
               <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
-                <TouchableOpacity style={{ backgroundColor: '#3f963b', padding: 10, borderRadius: 5, width: '45%'}} onPress={submitEvent}>
-                  <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold'}}>Submit</Text>
+                <TouchableOpacity style={[{ backgroundColor: '#3f963b'}, styles.createEventButtons]} onPress={submitEvent}>
+                  <Text style={styles.eventOptionsText}>Submit</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ backgroundColor: '#ab2626', padding: 10, borderRadius: 5, width: '45%'}} onPress={() => setModalVisible(false)}>
-                  <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold'}}>Cancel</Text>
+                <TouchableOpacity style={[{ backgroundColor: '#ab2626'}, styles.createEventButtons]} onPress={() => setModalVisible(false)}>
+                  <Text style={styles.eventOptionsText}>Cancel</Text>
                 </TouchableOpacity>
               </View>
 
@@ -89,22 +89,22 @@ export default function EventsScreen({navigation}) {
         <Text style={styles.sectionTitle}>Events</Text>
         <View style={{marginTop: 30, justifyContent: 'center'}}>
           {events.length === 0 ? 
-            <Text style={{textAlign:'center',justifyContent:'center',fontSize:'75',opacity:'0.1'}}>No Events</Text> : 
+            <Text style={styles.noEvent}>No Events</Text> : 
             
             <ScrollView style={styles.scroll}>
               {events.map((event, index) => (
-                <View key={index} style={{backgroundColor: '#FFFFFF', padding: 10, margin: 10,borderRadius: 10}}>
+                <View key={index} style={styles.eventItem}>
 
-                  <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{event.eventName}</Text>
+                  <Text style={styles.eventTitle}>{event.eventName.length === 0 ? "No Name" : event.eventName}</Text>
                   <Text>{event.eventDate} at {event.eventTime}</Text>
-                  <Text>{event.eventDescription}</Text>
+                  <Text>{event.eventDescription.length === 0 ? "No Description" : event.eventDescription}</Text>
 
                   <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <TouchableOpacity style={{ backgroundColor: '#3f963b', padding: 10, borderRadius: 5, width: '25%'}} onPress={() => editEvent(index)}>
-                      <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold'}}>Edit</Text>
+                    <TouchableOpacity style={[{backgroundColor: '#3f963b'}, styles.eventOptions]} onPress={() => editEvent(index)}>
+                      <Text style={styles.eventOptionsText}>Edit</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ backgroundColor: '#ab2626', padding: 10, borderRadius: 5, width: '25%'}} onPress={() => deleteEvent(index)}>
-                      <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold'}}>Delete</Text>
+                    <TouchableOpacity style={[{backgroundColor: '#ab2626'}, styles.eventOptions]} onPress={() => deleteEvent(index)}>
+                      <Text style={styles.eventOptionsText}>Delete</Text>
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -130,8 +130,6 @@ const styles = StyleSheet.create({
     paddingLeft: 1,
     fontSize: 50,
     color: 'grey',
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   addWrapper: {
     width: 60,
@@ -150,9 +148,51 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.main_background,
   },
-  createEvent: {
+  createEventButtons: {
+    padding: 10,
+    borderRadius: 5,
+    width: '45%'
+  },
+  createEventContainer: {
     flex: 1,
     backgroundColor: '#F5F5F5',
+  },
+  eventInfo: {
+    paddingTop: 20,
+    width: '90%',
+    borderRadius: 10,
+    marginTop: 70
+  },
+  eventInfoTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  eventItem: {
+    backgroundColor: '#FFFFFF',
+    padding: 10,
+    margin: 10,
+    borderRadius: 10
+  },
+  eventOptions: {
+    padding: 10,
+    borderRadius: 5,
+    width: '25%'
+  },
+  eventOptionsText: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold'
+  },
+  eventTitle: {
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  noEvent: {
+    textAlign:'center',
+    justifyContent:'center',
+    fontSize:'75',
+    opacity:'0.1'
   },
   scroll: {
     //flex: 1
@@ -163,7 +203,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     justifyContent: 'center',
-  },  
+  },
   tasksWrapper: {
       paddingTop: 40, 
       paddingHorizontal: 20,
