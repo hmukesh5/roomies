@@ -1,11 +1,33 @@
 import * as React from 'react';
 import {StyleSheet, TouchableOpacity, View, Text, TextInput, Button, Alert} from 'react-native'
+import * as FileSystem from 'expo-file-system';
 
 export var GLOBALNAME = "";
 export var GLOBALGROUPID = 0;
 
+async function writeToFile(data) {
+    try {
+      const fileUri = './components/profile.txt';
+      await FileSystem.writeAsStringAsync(fileUri, data, { encoding: FileSystem.EncodingType.UTF8 });
+    } catch (error) {
+      console.error(error);
+    }
+}
+
+async function readFile() {
+    try {
+      const fileUri = './components/profile.txt';
+      const fileContents = await FileSystem.readAsStringAsync(fileUri);
+      console.log(fileContents);
+      GLOBALGROUPID = parseInt(fileContents);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 //write name with a string name and groupid number
 function writeName(name, groupid) {
+    writeToFile(groupid);
     console.log("writing");
     fetch('http://10.2.0.25:3000/roomies/name', {
         method: 'POST',
@@ -27,7 +49,7 @@ function writeName(name, groupid) {
 }
 
 export default function ProfileScreen({navigation}) {
-
+    readFile();
 
     const [idName, setIDName] = React.useState(0);
     const [name, setName] = React.useState("");

@@ -51,7 +51,11 @@ fetch('http://10.2.0.25:3000/roomies/task', {
 })
   .then(response => response.json())
   .then(data => {
-    const values = data.values;    
+    const values = data.values.map( value => {
+        if (value[1] == GLOBALGROUPID) {
+            return value[0];
+        }
+    } );    
     console.log(`Values: ${values}`);
     STARTINGTASKS = values;
   })

@@ -1,5 +1,4 @@
 // node.js server
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
@@ -82,11 +81,11 @@ app.get('/roomies/task', function (req, res) {
     // Connecting to the database.
     connection.getConnection(function (err, connection) {
 
-        let sql = 'SELECT name FROM shoppinglist WHERE groupid = 2';
+        let sql = 'SELECT name, groupid FROM shoppinglist';
 
         connection.query(sql, function (error, results) {
             if (error) throw error;
-            const values = results.map(result => result.name);
+            const values = results.map(result => [result.name, result.groupid]);
             console.log(results);
             console.log(values);
             res.send({ values });
