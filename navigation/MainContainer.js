@@ -23,7 +23,7 @@ function LogoTitle() {
     return (
       <Image
         style={{alignContent: 'center', width: 90, height:40, marginBottom: 15}}
-        source={require('./roomies-large.png')}
+        source={require('./assets/roomies-large.png')}
       />
     );
   }  

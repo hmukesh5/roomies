@@ -62,8 +62,8 @@ export default function EventsScreen({navigation}) {
     return(
       <View style={styles.container}>
         <Modal animationType="slide" transparent={false} visible={modalVisible}>
-          <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#F5F5F5' }}>
-            <View style={{ alignSelf: 'flex-start', padding: 20, width: '90%', borderRadius: 10,marginTop: 50 }}>
+          <View style={styles.createEvent}>
+            <View style={{ paddingTop: 20, width: '90%', borderRadius: 10, marginTop: 70 }}>
               <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 10 }}>Create Event</Text>
               
               <CreateEventOption text={"Event Name"} val={eventName} setter={text => setEventName(text)}/>
@@ -147,6 +147,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#E8EAED',
+  },
+  createEvent: {
+    flex: 1,
+    backgroundColor: '#F5F5F5',
   },
   scroll: {
     //flex: 1
