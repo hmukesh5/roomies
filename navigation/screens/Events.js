@@ -1,10 +1,24 @@
 import * as React from 'react';
-import { View, Text, TouchableOpacity, Modal } from 'react-native';
-import { StyleSheet } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { SafeAreaView, View, Text, TouchableOpacity, Modal, StyleSheet, ScrollView } from 'react-native';
 
 import CreateEventOption from '../config/CreateEventOption';
+import {EventPopup} from '../config/EventPopup'
 import colors from '../config/colors'
+
+const popupList = [
+  {
+    id: 1,
+    name: 'Task'
+  },
+  {
+    id: 2,
+    name: 'Message'
+  },
+  {
+    id: 3,
+    name: 'Note'
+  },
+]
 
 export default function EventsScreen({navigation}) {
     const [modalVisible, setModalVisible] = React.useState(false);
@@ -15,12 +29,10 @@ export default function EventsScreen({navigation}) {
     const [events, setEvents] = React.useState([]);
     const [selectedEvent, setSelectedEvent] = React.useState(null);
 
-    
     const deleteEvent = (index) => {
         setEvents(events.filter((event, i) => i !== index));
     };
     
-
     const submitEvent = () => {
         if(selectedEvent !== null){
           // if existing event, idk if this shit finna work
@@ -60,6 +72,16 @@ export default function EventsScreen({navigation}) {
         setEventDescription(events[index].eventDescription);
         setSelectedEvent(index);
       };
+    
+    let popupRef = React.createRef()
+    
+    const onShowPopup = () => {
+      popupRef.show()
+    }
+    
+    const onClosePopup = () => {
+      popupRef.close()
+    }
 
     return(
       <View style={styles.container}>
@@ -113,12 +135,21 @@ export default function EventsScreen({navigation}) {
           }      
         </View>
 
-        <TouchableOpacity
-          style={styles.addWrapper}
-          onPress={() => {setModalVisible(true)}}
-        >
-          <Text style={styles.addText} >+</Text>
-        </TouchableOpacity>
+        <SafeAreaView style={styles.container}>
+            <TouchableOpacity
+              style={styles.addWrapper}
+              onPress={onShowPopup}
+            >
+              <Text style={styles.addText} >+</Text>
+            </TouchableOpacity>
+
+            <EventPopup
+              title="Add Event"
+              ref={(target) => popupRef = target}
+              onTouchOutside={onClosePopup}
+              data={popupList}
+            />
+          </SafeAreaView>
       </View>
     )
 }
