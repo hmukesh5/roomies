@@ -2,7 +2,9 @@ import * as React from 'react';
 import { View, Text, TouchableOpacity, Modal } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import CreateEventOption from './CreateEventOption';
+
+import CreateEventOption from '../config/CreateEventOption';
+import colors from '../config/colors'
 
 export default function EventsScreen({navigation}) {
     const [modalVisible, setModalVisible] = React.useState(false);
@@ -146,7 +148,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#E8EAED',
+    backgroundColor: colors.main_background,
   },
   createEvent: {
     flex: 1,

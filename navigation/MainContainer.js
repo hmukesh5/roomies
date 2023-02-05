@@ -5,6 +5,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Image, StyleSheet} from 'react-native';
 
+import colors from './config/colors'
+
 // Screens
 import ProfileScreen from './screens/Profile';
 import TasksScreen from './screens/Tasks';
@@ -22,7 +24,7 @@ const Tab = createBottomTabNavigator();
 function LogoTitle() {
     return (
       <Image
-        style={{alignContent: 'center', width: 90, height:40, marginBottom: 15}}
+        style={styles.logo}
         source={require('./assets/roomies-large.png')}
       />
     );
@@ -50,17 +52,26 @@ export default function MainContainer(){
 
                     return <Ionicons name={iconName} size={size} color={color}/>
                 },
-                tabBarActiveTintColor: '#81c8cc',
+                tabBarActiveTintColor: colors.primary,
                 tabBarInactiveTintColor: 'gray'
             })}>
 
-            <Tab.Screen name={profileName} component={ProfileScreen} options={{headerStyle: {backgroundColor: '#95c9cc'}, headerTitle: (props) => <LogoTitle {...props}/>}}/>
-            <Tab.Screen name={tasksName} component={TasksScreen} options={{headerStyle: {backgroundColor: '#95c9cc'}, headerTitle: (props) => <LogoTitle {...props}/>}}/>
-            <Tab.Screen name={listName} component={ListScreen} options={{headerStyle: {backgroundColor: '#95c9cc'}, headerTitle: (props) => <LogoTitle {...props}/>}}/>
-            <Tab.Screen name={eventsName} component={EventsScreen} options={{headerStyle: {backgroundColor: '#95c9cc'}, headerTitle: (props) => <LogoTitle {...props}/>}}/>
+            <Tab.Screen name={profileName} component={ProfileScreen} options={{headerStyle: {backgroundColor: colors.primary}, headerTitle: (props) => <LogoTitle {...props}/>}}/>
+            <Tab.Screen name={tasksName} component={TasksScreen} options={{headerStyle: {backgroundColor: colors.primary}, headerTitle: (props) => <LogoTitle {...props}/>}}/>
+            <Tab.Screen name={listName} component={ListScreen} options={{headerStyle: {backgroundColor: colors.primary}, headerTitle: (props) => <LogoTitle {...props}/>}}/>
+            <Tab.Screen name={eventsName} component={EventsScreen} options={{headerStyle: {backgroundColor: colors.primary}, headerTitle: (props) => <LogoTitle {...props}/>}}/>
 
 
             </Tab.Navigator>
         </NavigationContainer>
     );
 }
+
+const styles = StyleSheet.create({
+    logo: {
+        alignContent: 'center',
+        width: 90,
+        height:40,
+        marginBottom: 15
+    },
+})

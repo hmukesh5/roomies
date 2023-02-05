@@ -5,6 +5,8 @@ import * as FileSystem from 'expo-file-system';
 export var GLOBALNAME = "";
 export var GLOBALGROUPID = 0;
 
+import colors from '../config/colors'
+
 async function writeToFile(data) {
     try {
       const fileUri = './components/profile.txt';
@@ -55,7 +57,7 @@ export default function ProfileScreen({navigation}) {
     const [name, setName] = React.useState("");
 
     return(
-        <View>
+        <View style={styles.container}>
             <Text style={{ fontWeight: 'bold' }}>ID:</Text>
             <TextInput
                 value={idName}
@@ -76,5 +78,9 @@ export default function ProfileScreen({navigation}) {
 const styles = StyleSheet.create({
     button : {
         
+    },
+    container: {
+        flex: 1,
+        backgroundColor: colors.main_background,
     },
 })

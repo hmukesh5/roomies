@@ -1,9 +1,11 @@
 import * as React from 'react';
-import {View, Text, SafeAreaView, TextInput, StyleSheet} from 'react-native'
+import {View, Text, TextInput, StyleSheet} from 'react-native'
+
+import colors from '../config/colors'
 
 export default function TaskScreen({navigation}) {
     return(
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={styles.container}>
             <Text>Enter Task Name:</Text>
             <TextInput style={styles.input}/>
             <Text
@@ -18,7 +20,7 @@ export default function TaskScreen({navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: colors.main_background,
         alignItems: 'center',
         justifyContent: 'center',
     },

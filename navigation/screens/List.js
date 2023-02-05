@@ -3,6 +3,8 @@ import { StyleSheet, View, Text, TouchableWithoutFeedback, KeyboardAvoidingView,
 import Task from './components/To-Dos';
 import { GLOBALGROUPID, GLOBALNAME } from './Profile';
 
+import colors from '../config/colors'
+
 //function to post values to database
 function writeTask(taskName, groupid) {
     console.log("writing");
@@ -138,7 +140,7 @@ export default function ListScreen({navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#E8EAED',
+        backgroundColor: colors.main_background,
     },
     tasksWrapper: {
         paddingTop: 40, 
