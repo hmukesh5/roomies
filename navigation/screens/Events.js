@@ -5,23 +5,7 @@ import CreateEventOption from '../config/CreateEventOption';
 import {EventPopup} from '../config/EventPopup'
 import colors from '../config/colors'
 
-const popupList = [
-  {
-    id: 1,
-    name: 'Task'
-  },
-  {
-    id: 2,
-    name: 'Message'
-  },
-  {
-    id: 3,
-    name: 'Note'
-  },
-]
-
 export default function EventsScreen({navigation}) {
-    const [modalVisible, setModalVisible] = React.useState(false);
     const [eventName, setEventName] = React.useState('');
     const [eventDate, setEventDate] = React.useState('');
     const [eventTime, setEventTime] = React.useState('');
@@ -57,7 +41,6 @@ export default function EventsScreen({navigation}) {
               }
           ]);
         }
-        setModalVisible(false);
         setEventName('');
         setEventDate('');
         setEventTime('');
@@ -65,7 +48,6 @@ export default function EventsScreen({navigation}) {
     };
 
     const editEvent = (index) => {
-        setModalVisible(true);
         setEventName(events[index].eventName);
         setEventDate(events[index].eventDate);
         setEventTime(events[index].eventTime);
@@ -83,9 +65,36 @@ export default function EventsScreen({navigation}) {
       popupRef.close()
     }
 
+    const popupList = [
+      {
+        id: 1,
+        text: "Event Name", 
+        type: eventName,
+        setter: text => setEventName(text)
+      },
+      {
+        id: 2,
+        text: "Date", 
+        type: eventDate,
+        setter: text => setEventDate(text)
+      },
+      {
+        id: 3,
+        text: "Time", 
+        type: eventTime,
+        setter: text => setEventTime(text)
+      },
+      {
+        id: 4,
+        text: "Description", 
+        type: eventDescription,
+        setter: text => setEventDescription(text)
+      },
+    ]
+
     return(
       <View style={styles.container}>
-        <Modal style={{height: '50%'}} animationType="slide" transparent={false} visible={modalVisible}>
+        <Modal style={{height: '50%'}} animationType="slide" transparent={false} visible={false}>
           <View style={styles.createEventContainer}>
             <View style={styles.eventInfo}>
               <Text style={styles.eventInfoTitle}>Create Event</Text>

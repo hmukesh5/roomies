@@ -2,13 +2,28 @@ import React from 'react';
 import {Modal, Dimensions, TouchableOpacity,
 StyleSheet, View, Text, FlatList} from 'react-native'
 
+import CreateEventOption from '../config/CreateEventOption';
+import * as Font from 'expo-font';
+
 const deviceHeight = Dimensions.get("window").height
 export class EventPopup extends React.Component {
     constructor (props) {
         super (props)
         this.state = {
-            show: false
+            show: false,
+            fontsLoaded: false
         }
+    }
+
+    async loadFonts() {
+        await Font.loadAsync({
+            'SignikaNegative-Medium': require('../assets/fonts/SignikaNegative-Medium.ttf'),
+        });
+        this.setState({ fontsLoaded: true });
+    }
+
+    componentDidMount() {
+        this.loadFonts();
     }
 
     show = () => {
@@ -20,11 +35,11 @@ export class EventPopup extends React.Component {
     }
 
     renderOutsideTouchable(onTouch) {
-        const view = <View style={styles.view2}/>
+        const view = <View style={styles.renderOutsideTouch}/>
         if (!onTouch) return view
 
         return (
-            <TouchableOpacity onPress={onTouch} style={styles.view2}>
+            <TouchableOpacity onPress={onTouch} style={styles.renderOutsideTouch}>
                 {view}
             </TouchableOpacity>
         )
@@ -52,8 +67,8 @@ export class EventPopup extends React.Component {
                     renderItem={this.renderItem}
                     extraData={data}
                     keyExtractor={(item, index) => index.toString()}
-                    ItemSeparatorComponent={this.renderSeparator}
                     contentContainerStyle={styles.contentContainerStyle}
+                    scrollEnabled={false}
                 />
             </View>
         )
@@ -62,16 +77,10 @@ export class EventPopup extends React.Component {
     renderItem = ({item}) => {
         return (
             <View style={styles.renderItem}>
-                <Text style={styles.renderItemText}>{item.name}</Text>
+                <CreateEventOption text={item.text} val={item.type} setter={item.setter}/>
             </View>
         )
     }
-
-    renderSeparator = () => (
-        <View 
-            style={styles.renderSeparator}
-        />
-    )
 
     render () {
         let {show} = this.state
@@ -99,10 +108,9 @@ export class EventPopup extends React.Component {
 const styles = StyleSheet.create({
     shadowEffect: {
         flex: 1,
-        //backgroundColor: '#000000AA',
         justifyContent: 'flex-end',
     },
-    view2: {
+    renderOutsideTouch: {
         flex: 1,
         width: '100%'
     },
@@ -120,6 +128,7 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         marginTop: 15,
         marginBottom: 10,
+        fontFamily: "SignikaNegative-Medium"
     },
     renderTitleContainer: {
         alignItems: 'center'
@@ -127,22 +136,13 @@ const styles = StyleSheet.create({
     list: {
         marginBottom: 20
     },
-    renderSeparator: {
-        opacity: .1,
-        backgroundColor: '#182E44',
-        height: 1
-    },
     renderItem: {
-        height: 50,
+        height: 70,
         flex: 1,
         justifyContent: 'center',
         marginLeft: 20,
+        padding: 10,
     },
-    renderItemText: {
-        fontSize: 18,
-        fontWeight: 'normal',
-        color: '#182E44'
-    }
 })
 
 export default EventPopup;
